@@ -72,21 +72,21 @@ public class SortingAlgos implements SortingIntf {
 		MergeSortHelper(elements, 0, elements.length - 1);
 	}
 	public void HeapSort(int[] elements) {
-		/*Heap Sort Algorithm for sorting in increasing order: 
-			1. Build a max heap from the input data. 
-			2. At this point, the largest item is stored at the root of the heap. Replace it with the last item of the heap followed by reducing the size of heap by 1. Finally, heapify the root of the tree. 
-			3. Repeat step 2 while the size of the heap is greater than 1.*/
-		// heap sort
+		
+		// build heap from the given array
 		int size = elements.length;
 		for(int i = size/2 -1 ; i >= 0 ;i--)
 		
 			maxHeapify(elements,i,size); // building heap from the data
 		//sorting using heap
 		for(int i = size-1 ; i > 0; i--) {
+			//swap last element with first element
+			// to put it into max position
 			int temp = elements[0];
 			elements[0] = elements[i];
 			elements[i] = temp;
-			
+			//correct the rest of the heap 
+			//heap start 0 size of the heap is i 
 			maxHeapify(elements, 0, i);
 		}
 
@@ -95,22 +95,19 @@ public class SortingAlgos implements SortingIntf {
 
 	}
 	private void maxHeapify(int [] elements,int root,int size) {
-		/*
-		 * How to build the heap? Heapify procedure can be applied to a node only if its
-		 * children nodes are heapified. So the heapification must be performed in the
-		 * bottom-up order. Lets understand with the help of an example:
-		 */
+		
 		int largest = root;
 		int lchild = 2 * root + 1;
 		int rchild = 2 * root + 2;
-		//if left child is larger than root
+		//if left child is larger than root && does not exceed the heap size
 		if(lchild < size && elements[lchild] > elements[largest])
 			largest = lchild;
-		//if right child is larger than root
+		//if right child is larger than root && does not exceed the heap size
 		if(rchild < size && elements[rchild] > elements[largest])
 			largest = rchild;
 		
 		//if largest is not root
+		//i.e. heap property is violated correct it recursively
 		if(largest != root) {
 			int temp = elements[root];
 			elements[root] = elements[largest];
