@@ -190,5 +190,45 @@ class Tester {
 	    return result;
 
 	}
+	@Test
+	void testquickSortPostiveInput() {
+		int data[] = {32,21,4,3,21,5,7,4,1,0};
+		SortAlgos sort = new SortAlgos();
+		int expected[] = {0,1,3,4,4,5,7,21,21,32};
+		sort.quickSort(data);
+		assertArrayEquals(expected,data );
+	}
+	@Test
+	void testquickSortNegativeInput() {
+		int data[] = {-32,-21,-4,-3,-21,-5,-7,-4,-1,0};
+		SortAlgos sort = new SortAlgos();
+		int expected[] = {-32,-21,-21,-7,-5,-4,-4,-3,-1,0};
+		sort.quickSort(data);
+		assertArrayEquals(expected,data );
+	}
+	@Test
+	void testquickSortPostiveNegativeInput() {
+		int data[] = {32,21,4,-3,-21,5,-7,4,1,0};
+		SortAlgos sort = new SortAlgos();
+		int expected[] = {-21,-7,-3,0,1,4,4,5,21,32};
+		sort.quickSort(data);
+		assertArrayEquals(expected,data );
+	}
+	@Test
+	void testquickSortDuplicateValuePosInput() {
+		int data[] = {2,1,3,2,1,3,2,1,3,2,1,3,2,1,3};
+		SortAlgos sort = new SortAlgos();
+		int expected[] = {1,1,1,1,1,2,2,2,2,2,3,3,3,3,3};
+		sort.quickSort(data);
+		assertArrayEquals(expected,data );
+	}
+	@Test
+	void testquickSortDuplicateValueNegInput() {
+		int data[] = {-2,-1,-3,-2,-1,-3,-2,-1,-3,-2,-1,-3,-2,-1,-3};
+		SortAlgos sort = new SortAlgos();
+		int expected[] = {-3,-3,-3,-3,-3,-2,-2,-2,-2,-2,-1,-1,-1,-1,-1};
+		sort.quickSort(data);
+		assertArrayEquals(expected,data );
+	}
 
 }
