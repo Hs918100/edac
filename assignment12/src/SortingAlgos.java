@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class SortingAlgos implements SortingIntf {
 	private void Merge(int[] elements, int start1, int end1,
@@ -69,5 +70,53 @@ public class SortingAlgos implements SortingIntf {
 	@Override
 	public void MergeSort(int[] elements) {
 		MergeSortHelper(elements, 0, elements.length - 1);
+	}
+	public void HeapSort(int[] elements) {
+		/*Heap Sort Algorithm for sorting in increasing order: 
+			1. Build a max heap from the input data. 
+			2. At this point, the largest item is stored at the root of the heap. Replace it with the last item of the heap followed by reducing the size of heap by 1. Finally, heapify the root of the tree. 
+			3. Repeat step 2 while the size of the heap is greater than 1.*/
+		// heap sort
+		int size = elements.length;
+		for(int i = size/2 -1 ; i >= 0 ;i--)
+		
+			maxHeapify(elements,i,size); // building heap from the data
+		//sorting using heap
+		for(int i = size-1 ; i > 0; i--) {
+			int temp = elements[0];
+			elements[0] = elements[i];
+			elements[i] = temp;
+			
+			maxHeapify(elements, 0, i);
+		}
+
+			
+
+
+	}
+	private void maxHeapify(int [] elements,int root,int size) {
+		/*
+		 * How to build the heap? Heapify procedure can be applied to a node only if its
+		 * children nodes are heapified. So the heapification must be performed in the
+		 * bottom-up order. Lets understand with the help of an example:
+		 */
+		int largest = root;
+		int lchild = 2 * root + 1;
+		int rchild = 2 * root + 2;
+		//if left child is larger than root
+		if(lchild < size && elements[lchild] > elements[largest])
+			largest = lchild;
+		//if right child is larger than root
+		if(rchild < size && elements[rchild] > elements[largest])
+			largest = rchild;
+		
+		//if largest is not root
+		if(largest != root) {
+			int temp = elements[root];
+			elements[root] = elements[largest];
+			elements[largest] = temp;
+			//recursively heapify the sub-tree
+			maxHeapify(elements, largest, size);
+		}
 	}
 }
