@@ -87,41 +87,82 @@ private SinglyListNode sortedHead;
 	            curr.next = node;
 	        }
 	}
-
+//	quickSort(arr[], low, high)
+//	{
+//	    if (low < high)
+//	    {
+//	        /* pi is partitioning index, arr[pi] is now
+//	           at right place */
+//	        pi = partition(arr, low, high);
+//
+//	        quickSort(arr, low, pi - 1);  // Before pi
+//	        quickSort(arr, pi + 1, high); // After pi
+//	    }
+//	}
 	public void quickSort(int data[]) {
 		//start 0 end last element of arr
 		int start = 0; int end = data.length-1;
 		quickSortHelper(data,start,end);
 	}
 	private void quickSortHelper(int[] data,int start,int end) {
-		//do it untill arrays has 1 element
-		if(start < end) { 
-			//finding the partition index 
-			int pi = partition(data, start, end);
-			//sorting the parted arrays recursively
-			quickSortHelper(data, start, pi-1);
-			quickSortHelper(data, pi+1, end);
-		}
+		if(start == end)
+			return
+				// Divide elements in two groups
+				- Set pivote to first/start element
+			int pivot = start;
+			int left = start+1;
+			int right = end;
+			while (left <= right)
+			{
+				 // Find two elements pointed by left and right, which are incorrect.
+				 while(left < pivot)
+					 left++;
+				 while (right>pivot)
+					 right--;
+				int temp = data[left];
+				data[right] = data[left];
+				data[left] = temp;
+				}
+				//Swap pivote and right elements
+				int temp = data[pivot];
+				data[pivot] = data[right];
+				data[right] = data[pivot];
+				if (start < (right - 1) )
+				 quickSortHelper(data, start, right - 1);
+				if (end > (right + 1))
+				 quickSortHelper(data, right + 1, end);
 	}
 	private int partition(int []data,int start,int end) {
-		int pivot = data[end]; //choosing last element as pivot
-		int pIndex = start; //start is our pindex
-		//traversing over the whole array
-		for(int i = start ; i < end;i++) {
-			//if element is less than the pivot swap it with pivot index
-			
-			if(data[i] <= pivot) {
-				swap(data,i,pIndex);
-				pIndex++; // increase the pivot index
+		int pivot = data[start];//choosing start as pivot
+		int i = start;
+		for(int j = start ; j<end ;j++) {
+			if(data[j] < pivot) {
+				i++;
+				int temp = data[i];
+				data[i] = data[j];
+				data[j] = temp;
 			}
 		}
-		//swapping the pIndex element with the last element (which is our pivot)
-		swap(data,end,pIndex);
-		return pIndex;
+		
 	}
-	private void swap(int []data,int pos1,int pos2) {
-		int temp = data[pos1];
-		data[pos1] = data[pos2];
-		data[pos2] = temp;
-	}
+//	partition (arr[], low, high)
+//	{
+//	    // pivot (Element to be placed at right position)
+//	    pivot = arr[high];  
+//	 
+//	    i = (low - 1)  // Index of smaller element and indicates the 
+//	                   // right position of pivot found so far
+//
+//	    for (j = low; j <= high- 1; j++)
+//	    {
+//	        // If current element is smaller than the pivot
+//	        if (arr[j] < pivot)
+//	        {
+//	            i++;    // increment index of smaller element
+//	            swap arr[i] and arr[j]
+//	        }
+//	    }
+//	    swap arr[i + 1] and arr[high])
+//	    return (i + 1)
+//	}
 }
